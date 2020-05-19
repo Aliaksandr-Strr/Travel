@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="row">
+        <div class="row">
+        <h1 class="display-4">Города</h1>
+            <div class="col-md-6">
+                {% for object in objects_list %}
+                    <p>{{object.name}}</p>
+                {% endfor%}
+            </div>
+        </div>
+    </div>
+{% endblock %}
