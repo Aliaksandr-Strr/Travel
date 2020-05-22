@@ -18,7 +18,7 @@ from django.urls import path, include
 # from .views import home_page
 
 urlpatterns = [
-    # path('', home_page),
     path('admin/', admin.site.urls),
     path('cities/', include(('cities.urls', 'city'))),
+    path('', include('cities.urls')),
 ]
