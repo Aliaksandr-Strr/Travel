@@ -1,19 +1,17 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView, CreateView, DeleteView
+from django.core.paginator import Paginator
 from .forms import CityForm
 from .models import City
 
 
 def home(request):
-    if request.method == 'POST':
-        form = CityForm(request.POST or None)
-        if form.is_valid():
-            print(form.cleaned_data)
-    form = CityForm()
-    city = request.POST.get('name')
     cities = City.objects.all()
-    return render(request, 'cities/home.html', {'objects_list': cities, 'cities': form})
+    paginator = Paginator(cities, 2)
+    page = request.GET.get('page')
+    cities = paginator.get_page(page)
+    return render(request, 'cities/home.html', {'objects_list': cities, })
 
 
 class CityDetailView(DetailView):
